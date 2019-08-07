@@ -22,4 +22,11 @@ class Api::PagesController < ApplicationController
     )
     render json: response.parse
   end
+
+  def spotify_search
+    response = HTTP
+      .headers("Authorization" => "Bearer #{params[:spotify_access_token]}")
+      .get("https://api.spotify.com/v1/search?q=test&type=artist")
+    render json: response.parse
+  end
 end
